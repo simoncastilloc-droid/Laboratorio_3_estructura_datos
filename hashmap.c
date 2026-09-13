@@ -58,7 +58,7 @@ HashMap * createMap(long capacity)
     map->capacity = capacity;
     map->current = -1;
 
-    return NULL;
+    return map;
 }
 
 // 2. Implemente la función void insertMap(HashMap * map, char * key, void * value). 
