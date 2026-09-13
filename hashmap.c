@@ -70,7 +70,32 @@ HashMap * createMap(long capacity)
 //    c - Ingrese el par en la casilla que encontró.
 // No inserte claves repetidas. Recuerde que el arreglo es circular. Recuerde actualizar la variable size.
 
-void insertMap(HashMap * map, char * key, void * value) {
+void insertMap(HashMap * map, char * key, void * value) 
+{
+    long index = hash(key, map->capacity);
+    long inicio = index;
+
+    while(map->buckets[index] != NULL)
+    {
+        if(map->buckets[index]->key != NULL)
+        {
+            if(is_equal(map->buckets[index]->key, key)
+            {
+                return;
+            }
+        }
+        index=(index + 1)%map->capacity;
+
+        if(index==inicio)
+        {
+            enlarge(map);
+            index=hash(key,map->capacity);
+            inicio=index;
+        }
+    }
+    map->buckets[index]=createPair(key,value);
+    map->size++;
+    map->current=index;
 
 }
 

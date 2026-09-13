@@ -18,3 +18,19 @@ Sun Sep 13 07:37:04 PM UTC 2026:
  tests:  1|6
 total_score: 5/60
 5e5efef
+Sun Sep 13 07:47:10 PM UTC 2026: 
+ hashmap.c | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
+Compilation failed
+In file included from test.c:5:
+hashmap.c: In function ‘insertMap’:
+hashmap.c:82:55: error: expected ‘)’ before ‘{’ token
+   82 |             if(is_equal(map->buckets[index]->key, key)
+      |               ~                                       ^
+      |                                                       )
+   83 |             {
+      |             ~                                          
+hashmap.c:86:9: error: expected expression before ‘}’ token
+   86 |         }
+      |         ^
+d0391f1
