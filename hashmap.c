@@ -46,16 +46,16 @@ int is_equal(void* key1, void* key2){
 
 HashMap * createMap(long capacity) 
 {
-    HashMap *map = (HashMap *)malloc(sizeof(HashMap));
-    map->buckets = (Pair **)malloc(sizeof(Pair *) * capacity);
+    HashMap *map = (HashMap *)malloc(sizeof(HashMap)); //reservo espacio para el hashmap
+    map->buckets = (Pair **)malloc(sizeof(Pair *) * capacity);//se crean casillas
 
     for(int i = 0;i < capacity; i++)
     {
-        map->buckets[i] = NULL;
+        map->buckets[i] = NULL;//se dejan vacias
     }
 
     map->size = 0;
-    map->capacity = capacity;
+    map->capacity = capacity;//inicializamos todo como nos indican
     map->current = -1;
 
     return map;
@@ -72,23 +72,23 @@ HashMap * createMap(long capacity)
 
 void insertMap(HashMap * map, char * key, void * value) 
 {
-    long index = hash(key,map->capacity);
-    long inicio = index;
+    long index = hash(key,map->capacity); //donde buscar
+    long inicio = index;//posicion inicia
 
-    while(map->buckets[index] != NULL)
+    while(map->buckets[index] != NULL)//mientras la casilla este ocupada
     {
         if(map->buckets[index]->key != NULL)
         {
-            if(is_equal(map->buckets[index]->key, key))
+            if(is_equal(map->buckets[index]->key, key))//si clave igual
             {
-                return;
+                return;//no se inserta de nuevo
             }
         }
-        index=(index + 1)%map->capacity;
+        index=(index + 1)%map->capacity;//si no se avanza
 
         if(index==inicio)
         {
-            enlarge(map);
+            enlarge(map);//agrandamos la tabla
             index=hash(key,map->capacity);
             inicio=index;
         }
@@ -139,10 +139,11 @@ Pair * searchMap(HashMap * map,  char * key)
 
 void eraseMap(HashMap * map,  char * key) 
 {    
-    Pair *par = searchMap(map,key);
+    Pair *par = searchMap(map,key);//buscams la clave
 
-    if(par==NULL)
+    if(par==NULL)//si no existe
         return;
+    //si existe se invalida la clave
     par->key=NULL;
     map->size--;
 }
@@ -153,7 +154,7 @@ void eraseMap(HashMap * map,  char * key)
 
 Pair * firstMap(HashMap * map) 
 {
-    for(long i = 0; i < map->capacity; i++)
+    for(long i = 0; i < map->capacity; i++)//encontramos primer elemento valido
     {
         if(map->buckets[i] != NULL)
         {
@@ -188,7 +189,6 @@ Pair * nextMap(HashMap * map)
     return NULL;
 }
 
-
 // 6.- Implemente la función void enlarge(HashMap * map). Esta función agranda la capacidad del arreglo buckets y reubica todos sus elementos. 
 // Para hacerlo es recomendable mantener referenciado el arreglo actual/antiguo de la tabla con un puntero auxiliar. 
 // Luego, los valores de la tabla se reinicializan con un nuevo arreglo con el doble de capacidad. 
@@ -204,31 +204,26 @@ void enlarge(HashMap * map)
 {
     enlarge_called = 1; //no borrar (testing purposes)
 
-    Pair **old_buckets = map->buckets;
+    Pair **old_buckets = map->buckets;//guardamos antiguo
     long old_capacity=map->capacity;
-    map->capacity=map->capacity*2;
-    map->buckets=(Pair **)malloc(sizeof(Pair *)* map->capacity);
+    map->capacity=map->capacity*2;//duplicamos la capacidad
+    map->buckets=(Pair **)malloc(sizeof(Pair *)* map->capacity);//creamos nueva tabla
 
     for(long i = 0; i < map->capacity; i++)
     {
-        map->buckets[i]=NULL;  
+        map->buckets[i]=NULL;  //iniciamos buckets en null
     }
-    map->size=0;
+    map->size=0;//reiniciamos size
 
     for(long i = 0; i < old_capacity; i++)
     {
         if(old_buckets[i] != NULL)
         {
-            if(old_buckets[i]->key != NULL)
+            if(old_buckets[i]->key != NULL)//si par valido se inserta
             {
                 insertMap(map,old_buckets[i]->key,old_buckets[i]->value);
             }
-        }    
+        }
     }
-    free(old_buckets);
+    free(old_buckets);//se libera arreglo antiguo
 }
-
-
-
-
-
