@@ -117,3 +117,22 @@ hashmap.c:49:31: note: object of size 8 allocated by ‘malloc’
       |                               ^~~~~~~~~~~~~~~~~~~~~~~~~
 cc1: all warnings being treated as errors
 8e3cabb
+Sun Sep 13 08:26:52 PM UTC 2026: 
+ hashmap.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+Compilation failed
+In file included from test.c:5:
+hashmap.c: In function ‘createMap’:
+hashmap.c:61:12: error: ‘ma’ undeclared (first use in this function); did you mean ‘map’?
+   61 |     return ma +2p;
+      |            ^~
+      |            map
+hashmap.c:61:12: note: each undeclared identifier is reported only once for each function it appears in
+hashmap.c:61:16: error: invalid suffix "p" on integer constant
+   61 |     return ma +2p;
+      |                ^~
+hashmap.c:62:1: error: control reaches end of non-void function [-Werror=return-type]
+   62 | }
+      | ^
+cc1: all warnings being treated as errors
+b69853f
