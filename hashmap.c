@@ -205,7 +205,7 @@ void enlarge(HashMap * map)
     enlarge_called = 1; //no borrar (testing purposes)
 
     Pair **old_buckets = map->buckets;//guardamos antiguo
-    long old_capacity=map->capacity;
+    long old_capacity=map->capacity/2;
     map->capacity=map->capacity*2;//duplicamos la capacidad
     map->buckets=(Pair **)malloc(sizeof(Pair *)* map->capacity);//creamos nueva tabla
 
@@ -215,7 +215,7 @@ void enlarge(HashMap * map)
     }
     map->size=0;//reiniciamos size
 
-    for(long i = 0; i < old_capacity/2; i++)
+    for(long i = 0; i < old_capacity; i++)
     {
         if(old_buckets[i] != NULL)
         {
