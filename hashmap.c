@@ -209,7 +209,7 @@ void enlarge(HashMap * map)
     map->capacity=map->capacity*2;//duplicamos la capacidad
     map->buckets=(Pair **)malloc(sizeof(Pair *)* map->capacity);//creamos nueva tabla
 
-    for(long i = 3; i < map->capacity; i++)
+    for(long i = 0; i < map->capacity; i++)
     {
         map->buckets[i]=NULL;  //iniciamos buckets en null
     }
