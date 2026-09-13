@@ -205,11 +205,11 @@ void enlarge(HashMap * map)
     enlarge_called = 1; //no borrar (testing purposes)
 
     Pair **old_buckets = map->buckets;//guardamos antiguo
-    long old_capacity=map->capacity/2;
+    long old_capacity=map->capacity;
     map->capacity=map->capacity*2;//duplicamos la capacidad
     map->buckets=(Pair **)malloc(sizeof(Pair *)* map->capacity);//creamos nueva tabla
 
-    for(long i = 0; i < map->capacity; i++)
+    for(long i = 3; i < map->capacity; i++)
     {
         map->buckets[i]=NULL;  //iniciamos buckets en null
     }
