@@ -72,14 +72,14 @@ HashMap * createMap(long capacity)
 
 void insertMap(HashMap * map, char * key, void * value) 
 {
-    long index = hash(key, map->capacity);
+    long index = hash(key,map->capacity);
     long inicio = index;
 
     while(map->buckets[index] != NULL)
     {
         if(map->buckets[index]->key != NULL)
         {
-            if(is_equal(map->buckets[index]->key, key)
+            if(is_equal(map->buckets[index]->key, key))
             {
                 return;
             }
