@@ -215,7 +215,7 @@ void enlarge(HashMap * map)
     }
     map->size=0;//reiniciamos size
 
-    for(long i = 0; i < old_capacity; i++)
+    for(long i = 0; i < old_capacity/2; i++)
     {
         if(old_buckets[i] != NULL)
         {
